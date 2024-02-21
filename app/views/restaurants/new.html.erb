@@ -1,0 +1,12 @@
+<%= simple_form_for @restaurant, local: true do |form| %>
+  <%= form.input :name %>
+  <%= form.input :address %>
+  <%= form.input :category %>
+
+  <%= form.button :submit, "Create Restaurant" %>
+<% end %>
+
+<div>
+  <%= link_to "Back to restaurants", restaurants_path %>
+</div>
+>

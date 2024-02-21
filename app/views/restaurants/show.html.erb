@@ -1,21 +1,52 @@
-<h1><%= @restaurant.name %></h1>
-<p>
-  <h4>Address:</h4>
-  <%= @restaurant.address %>
-</p>
-
-<p>
-  <h4>Category:</h4>
-  <%= @restaurant.category %>
-</p>
-
-<h2>Reviews</h2>
-<% @restaurant.reviews.each do |review| %>
-  <div>
-    <p><%= review.content %></p>
-    <p>Rating: <%= review.rating %>/5</p>
+<div class="container mt-3">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <img src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="card-img-top" alt="<%= @restaurant.name %>">
+        <div class="card-body">
+          <h1 class="card-title"><%= @restaurant.name %></h1>
+          <p class="card-text">
+            <strong>Address:</strong>
+            <%= @restaurant.address %>
+          </p>
+          <p class="card-text">
+            <strong>Category:</strong>
+            <%= @restaurant.category %>
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
-<% end %>
 
-<%= link_to 'Add Review', new_restaurant_review_path(@restaurant) %>
-<%= link_to 'Back to Restaurants', restaurants_path %>
+  <h2 class="mt-4 text-center">Reviews</h2>
+  <div class="row justify-content-center">
+    <% @restaurant.reviews.each do |review| %>
+      <div class="col-md-6 mt-2">
+        <div class="card">
+          <div class="card-body">
+            <p class="card-text"><%= review.content %></p>
+            <p class="card-text">Rating: <%= review.rating %>/5</p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="text-center mt-3">
+    <%= link_to 'Back to Restaurants', restaurants_path, class: 'btn btn-secondary' %>
+  </div>
+</div>
+
+
+<div class="container">
+  <h1 class="text-center mt-5">New Review for <%= @restaurant.name %></h1>
+  <%= simple_form_for([@restaurant, @review]) do |f| %>
+    <div class="form-group">
+      <%= f.input :content, label: 'Your Review', input_html: { class: 'form-control' } %>
+    </div>
+    <div class="form-group">
+      <%= f.input :rating, label: 'Rating', input_html: { class: 'form-control' }, collection: 1..5, as: :select %>
+    </div>
+    <%= f.button :submit, 'Submit Review', class: "btn btn-primary" %>
+  <% end %>
+</div>
