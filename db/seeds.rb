@@ -7,3 +7,20 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+# db/seeds.rb
+
+Restaurant.destroy_all
+
+restaurants = [
+  { name: "Ch Restaurant", address: "Beijing, China", category: "chinese" },
+  { name: "It Restaurant", address: "Rome, Italy", category: "italian" },
+  { name: "Jp Restaurant", address: "Tokyo, Japan", category: "japanese" },
+  { name: "Fr Restaurant", address: "Paris, France", category: "french" },
+  { name: "Bl Restaurant", address: "Brussels, Belgium", category: "belgian" }
+]
+
+restaurants.each do |restaurant|
+  Restaurant.create!(restaurant)
+end
+
+puts "Created #{Restaurant.count} restaurants."
